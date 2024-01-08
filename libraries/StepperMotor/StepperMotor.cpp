@@ -112,3 +112,11 @@ void StepperMotor::startSpin() {
   Serial.print("Stepper value channed to: ");
   Serial.println(isRolling());
 }
+
+unsigned long StepperMotor::getSpinTime(){
+  return spinTime;
+}
+
+int StepperMotor::getSpeed(){
+  return speed;
+}

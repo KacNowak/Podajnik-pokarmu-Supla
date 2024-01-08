@@ -26,6 +26,8 @@ public:
   void setSpinTime(unsigned long sT);
   void setSpeed(int newSpeed);
   void startSpin();
+  unsigned long getSpinTime();
+  int getSpeed();
 };
 
 #endif
