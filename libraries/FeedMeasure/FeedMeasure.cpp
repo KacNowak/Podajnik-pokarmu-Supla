@@ -32,6 +32,10 @@ void FeedMeasure::measure(){
       percentValue = map(value, inputLow, inputHigh, 100, 0);
       Serial.print("Measure [%]: ");
       Serial.println(percentValue);
+      sensorPercent->setValue(percentValue);
+      if (percentValue < 10) {
+        empty->set();
+      }else empty->clear();
     }
   } else {
     Serial.println("Incorrect data");
@@ -42,7 +46,9 @@ bool FeedMeasure::isOn() {
   return state;
 }
 
-void FeedMeasure::measureStart() {
+void FeedMeasure::measureStart(Supla::Sensor::VirtualHygroMeter *vs, Supla::Sensor::VirtualBinary *bs) {
+  sensorPercent = vs;
+  empty = bs;
   state=true;
   Serial.println("Feed measure: Start");
 }

@@ -4,6 +4,8 @@
 #include <Arduino.h>
 #include "Adafruit_VL53L0X.h"
 #include <Wire.h>
+#include <supla/sensor/virtual_hygromometer.h>
+#include <supla/sensor/virtual_binary.h>
 
 class FeedMeasure {
 protected:
@@ -17,13 +19,15 @@ protected:
   bool restart;
   int deviceAddress;
   Adafruit_VL53L0X lox = Adafruit_VL53L0X();
+  Supla::Sensor::VirtualHygroMeter *sensorPercent = nullptr;
+  Supla::Sensor::VirtualBinary *empty = nullptr;
 
 public:
   FeedMeasure();
   void measure();
   void iterate();
   bool isOn();
-  void measureStart();
+  void measureStart(Supla::Sensor::VirtualHygroMeter *vs, Supla::Sensor::VirtualBinary *bs);
   void measureStop();
   void setMeasureDelayTime(unsigned long val);
   int getValue();

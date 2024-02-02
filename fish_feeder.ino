@@ -54,7 +54,7 @@ WebServer *server = nullptr;
 Button button(BUTTON_CFG_GPIO);
 
 bool webSerwerStart = true;
-unsigned long switchModeTime = 60000; //- 60sekund, 300000 - 5 minut czas na przejscie w tryb AP (Offline) jezeli nie ma sieci
+unsigned long switchModeTime = 60000; //- 30sekund, 300000 - 5 minut czas na przejscie w tryb AP (Offline) jezeli nie ma sieci
 unsigned long previousMillisStatus = 0;
 int k=0;
 
@@ -84,7 +84,7 @@ void setup() {
 
   applyParameters();
 
-  feed.measureStart();
+  feed.measureStart(virtualSensor2, virtualSensor);
   button.init(clickHandler, longPressHandler);
 }
 
@@ -162,12 +162,13 @@ void updateSettings() {
   }
 }
 
+/*
 void updateSensor() {
   virtualSensor2->setValue(feed.getPercentValue());
   if (feed.getPercentValue() < 10) virtualSensor->set();
   else virtualSensor->clear();
 
-}
+}*/
 
 void switchMode() {
   if (SuplaDevice.getCurrentStatus() == 8 && !server->isRunning()) {
